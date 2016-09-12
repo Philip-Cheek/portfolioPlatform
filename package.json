@@ -1,0 +1,15 @@
+{
+  "name": "personal-portfolio",
+  "version": "1.0.0",
+  "description": "source code for my personal portfolio website",
+  "main": "index.js",
+  "scripts": {
+    "test": "command"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "nodemailer": "^2.6.0"
+  },
+  "author": "philip cheek"
+}

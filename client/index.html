@@ -1,0 +1,28 @@
+<head>
+	<link rel = "stylesheet" type='text/css' href = "resources/style.css">
+
+	<link rel="stylesheet" type='text/css' href='bower_components/font-awesome/css/font-awesome.min.css'>
+	<script type='text/javascript' src ='bower_components/angular/angular.min.js'></script>
+	<script type='text/javascript' src ='bower_components/angular-route/angular-route.min.js'></script>
+
+	<script src = 'app/app.js'></script>
+	<script src = 'app/services/cardService.js'></script>
+	<script src = 'app/controllers/menuController.js'></script>
+	<script src = 'app/controllers/contactController.js'></script>
+	<script src = 'app/controllers/projectController.js'></script>
+</head>
+
+<body ng-app = 'resumeApp'>
+	<div id = 'column' ng-controller = 'menuController'>
+		<div id = 'columnBody' ng-repeat = 'item in menuItems'>
+			<span class = 'square' ng-class = "{'selected': item.selected}">
+				<a class = 'mItem' ng-class = "{'selected': item.selected}" ng-click = "linkClicked(item)">{{item.name}}</a>
+			</span><br>
+		</div>
+	</div>
+	<div id = 'main'>
+		<div ng-view = ''>
+		</div>
+	</div>
+
+</body>

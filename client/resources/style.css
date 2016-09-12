@@ -1,0 +1,383 @@
+@import url(https://fonts.googleapis.com/css?family=Monoton|Comfortaa);
+
+*{
+  padding:0;
+  margin:0;
+}
+
+body{
+  height:100vh;
+  background: #edf2f4;
+  overflow:hidden;
+}
+
+
+a:hover{
+  cursor:pointer;
+}
+
+.under{
+  text-decoration:underline;
+}
+
+  #column{
+    height:100%;
+    width:33%;
+    background: #22313F;
+    position:fixed;
+    box-shadow: .3em 0em 10px #888888;
+  }
+
+    #columnBody{
+      margin:0 auto;
+      margin-top:1em;
+      font-family: Arial;
+      font-size:1em;
+      text-align: center;
+    }
+
+      a.mItem, a.mItem:visited, a.mItem:hover, a.mItem:active{
+       /* -webkit-backface-visibility:hidden;
+                backface-visibility:hidden;*/
+        position:relative;
+        transition:0.5s color ease;
+        text-decoration:none;
+        color:#81b3d2;
+        font-size:2.5em;
+      }
+
+      a.mItem:hover{
+        color:#d73444;
+      }
+
+      .square a.selected{
+        color:white;
+      }
+
+      a.mItem:before,a.mItem:after{
+        content: "";
+        transition:0.5s all ease;
+        -webkit-backface-visibility:hidden;
+                backface-visibility:hidden;
+        position:absolute;
+      }
+a.mItem:before{
+  top:-0.25em;
+}
+a.mItem:after{
+  bottom:-0.25em;
+}
+a.mItem:before,a.mItem:after{
+  height:5px;
+  height:0.35rem;
+  width:0;
+  background:#d73444;
+}
+
+.square{
+  /*box-sizing:border-box;*/
+  margin-left:-0.4em;
+  position:relative;
+  font-size:2.5em;
+  overflow:hidden;
+}
+.square a.mItem{
+  position:static;
+  font-size:100%;
+  padding:0.2em 0.4em;
+}
+.square:before,.square:after, .square.slected:before, .square.selected:after{
+  content: "";
+  /*box-sizing:border-box;*/
+  /*transition:0.25s all ease;*/
+  /*-webkit-backface-visibility:hidden;
+          backface-visibility:hidden;*/
+  position:absolute;
+  width:5px;
+  /*width:0.35rem;*/
+  height:0;
+  background:#d73444;
+}
+
+.square.selected:before, .square.selected:after{
+  content: "";
+  position:absolute;
+  width:5px;
+  color:red;
+  background:#d73444;
+}
+
+
+.square:before, .square.selected:before{
+  left:0;
+  bottom:-0.2em;
+}
+
+.square:after, .square.selected:after{
+  right:0;
+  top:-0.2em;
+}
+.square a.mItem:before{
+  left:0;
+  /*transition:0.25s all ease;*/
+}
+.square a.mItem:after{
+  right:0;
+  /*transition:0.25s all ease;*/
+}
+
+.square:hover:before,.square:hover:after, .square.selected:before, .square.selected:after{
+  height:calc(100% + 0.4em);
+}
+.square:hover a.mItem:before,.square:hover a.mItem:after, .square a.selected:before, .square a.selected:after{
+  width:100%;
+}
+
+  #main{
+    height:100%;
+    width:67%;
+    margin-left: 33%;
+  }
+
+    #cardContainer{
+      height:100%;
+      width:100%;
+      webkit-perspective: 1000px;
+              perspective: 1000px;
+      -webkit-transform-style: preserve-3d;
+              transform-style: preserve-3d;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      font-family: 'Monoton', cursive;;
+      color:white;
+      overflow: hidden;
+    }
+
+      #card {
+        margin:auto;
+        background: #7A0000;
+        pointer-events: none;
+        -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+        padding: 30px;
+        border-radius: 5px;
+        width: 400px;
+        height: 200px;
+        margin-left: -105px
+        -webkit-transform-style: preserve-3d;
+                transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+          #card .phil{
+            font-size:45px;
+            color:white;
+          }
+
+
+          #card:after {
+            content: " ";
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            border-radius: 50%;
+            left: 0;
+            bottom: -50px;
+            box-shadow: 0 30px 20px rgba(0, 0, 0, 0.3);
+          }
+
+          #card .outline{
+            width:100%;
+            height:100%;
+            border: 1px dashed white;
+            border-radius: 2%;
+            padding:2px;
+            -webkit-transform: translateZ(25px);
+                    transform: translateZ(25px);
+            -webkit-transform-style: preserve-3d;
+                    transform-style: preserve-3d;
+            display: block;
+          }
+
+          #card .card-content {
+            margin: auto;
+            text-align: center;
+            -webkit-transform-style: preserve-3d;
+                    transform-style: preserve-3d;
+          }
+
+          #card .phil {
+            -webkit-transform: translateZ(60px);
+                    transform: translateZ(60px);
+          }
+          #card .other{
+            margin-top:6.3em;
+            -webkit-transform: translateZ(30px);
+                    transform: translateZ(30px);
+            display: block;
+          }
+
+          #card p.related {
+            -webkit-transform: translateZ(80px);
+                    transform: translateZ(80px);
+            font-style: italic;
+          }
+
+          #card a.git{
+           color:black;
+           font-size: 9.5em;
+           position:absolute;
+           top:calc(100% * .18);
+           right:calc(100% / 2.9);
+           transition:0.25s color ease;
+
+          }
+
+  .fa-chevron-circle-right, fa fa-chevron-right{
+    display:inline-block;
+    -webkit-transform:(0deg);
+            transform:(0deg);
+    -webkit-transition: transform .1s linear;
+            transition: transform .1s linear;
+  }
+
+  .bodyText{
+    margin-top:1em;
+    font-family:Arial;
+  }
+
+  .infoLink{
+    float:right;
+    vertical-align: top;
+    background: rgba(34, 49, 63, 0.2);
+    width:42%;
+    padding:.3em;
+    color:#22313F;
+    font-family: 'Comfortaa', cursive;
+  }
+
+  .projectList{
+    margin-bottom:1.35em;
+  }
+
+  .projectUnder{
+    margin-top:-1.5em;
+     max-height: 0;
+    transition: max-height .25s ease-out, margin-top .45s;
+    overflow: hidden;
+
+  }
+
+  .projectUnder.underOpen{
+    margin-top:0em;
+    max-height:100em;
+    -webkit-transition: max-height .75s, margin-top .25s;
+    transition:max-height .75s, margin-top .25s;
+  } 
+    .infoLink{
+      overflow: hidden;
+    }
+    .infoLink img{
+      width:100%;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .infoLink a{
+      text-decoration: none;
+    }
+
+    .infoLink a.pSource{
+      display: block;
+      color:#22313F;
+      font-size:1.7em;
+      background: rgba(34, 49, 63, 0.35);
+      border-radius: .08em;
+      padding:.08em;
+      margin: .3em auto;
+      width:100%;
+      max-width:8em;
+    }
+
+    .infoLink ul{
+      margin-left: 1em;
+    }
+
+    .infoLink #left{
+      margin-left: 8%;
+    }
+
+    .infoLink #left p{
+      margin-top:.3em;
+      margin-bottom: .3em
+    }
+  #projectContainer{
+    height:95%;
+    margin-left:1.5em;
+    padding-top:1.5em;
+    overflow-y:scroll;
+  }
+
+    a.pTitle{
+      font-family: 'Comfortaa', cursive;
+      font-size:2.5em;
+      color:#22313F;
+    }
+
+
+  .open{
+   -webkit-transform:rotate(90deg);
+            transform:rotate(90deg);
+    -webkit-transition: transform .1s linear;
+            transition: transform .1s linear;
+  }
+
+  .iText{
+    margin-top: -.5em;
+    max-height:0em;
+    opacity:0;
+    transition: opacity 1s ease, margin-top .2s ease;
+  }
+
+  .reveal{
+    opacity: 100;
+    margin-top:.5em;
+    display: block;
+    max-height:20em;
+    -webkit-transition: opacity 1s ease, margin-top .2s ease;
+    transition: opacity 1s ease, margin-top .2s ease;
+  }
+
+  .tech img{
+    width: 30%;
+  }
+
+#contactWrapper{
+  margin-left:1.5em;
+  padding-top:1em;
+}
+
+.sUnder{
+  max-height: 0em;
+  transition: max-height .3s ease;
+  overflow: hidden;
+}
+
+.revealed{
+   max-height: 10em;
+  transition: max-height .35s ease;
+}
+
+
+
+
+

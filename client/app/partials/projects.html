@@ -1,0 +1,48 @@
+<div id = 'projectContainer' ng-controller = 'projectController'>
+	<div class = 'projectList' ng-repeat = 'project in projects'>
+
+		<a class = 'pTitle' ng-click = 'project.open = !project.open'><i ng-class = "{'open':project.open}" class="fa fa-chevron-circle-right" aria-hidden="true"></i> <span class = 'under'>{{project.name}}</span></a>
+
+
+		<div class = 'projectUnder'  ng-class = '{"underOpen":project.open}'>
+
+			<div class = 'infoLink'>
+
+				<a  ng-href='{{project.gallery[0]}}'><img class = 'first' ng-src = '{{project.gallery[0]}}'/></a>
+
+				<a class = 'pSource' ng-href = "{{project.source}}"><i class="fa fa-github" aria-hidden="true"></i> <span class = 'under'>Source Code</span></a>
+
+				<a class = 'pSource' ng-if = "project.deployment.status" ng-href = "{{project.deployment.link}}"><i class="fa fa-external-link" aria-hidden="true"></i> <span class = 'under'>{{project.deployment.type}}</span></a>
+
+				<div id = 'left'>
+
+					<p><b>Type:</b> {{project.type}}</p>
+					<p><b>Status:</b> {{project.status}}</p>
+					<p><b>Technology Stack:</b></p>
+
+					<ul>
+						<li ng-repeat = "tech in project.stack">{{tech}}</li>
+					</ul>
+
+				</div>
+				
+			</div>
+
+			<div class = 'bodyText' ng-repeat = 'component in project.components'>
+				<a ng-click = 'component.val = !component.val'><i ng-class = "{'open':component.val}" class="fa fa-chevron-right" aria-hidden="true"></i> <span class = 'under'>{{component.name}}</span></a>
+				<div class = 'iText' ng-class = '{"reveal":component.val}'>
+					<div ng-if = 'component.val && component.body' ng-repeat = 'paragraph in component.body'>
+						<p>{{paragraph}}</p><br>
+					</div>
+					<div ng-if = 'component.val && component.tech' ng-repeat = '(techType, listed) in project.technology'>
+				</div>
+			</div>
+
+			<!-- <h2>Technology</h2>
+			<div class = 'tech' ng-repeat = '(techType, listed) in project.technology'>
+				<h3>{{techType}}:<h3>
+				<img class = 'gList' ng-repeat = 'logo in listed' ng-src = '{{logo}}'><br>
+			<div> -->
+		</div>
+	</div>
+</div>
