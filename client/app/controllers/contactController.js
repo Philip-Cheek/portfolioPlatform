@@ -6,7 +6,7 @@ angular.module('resumeApp').controller('contactController', function($scope, $ht
 	$scope.contact = {
 		'Phone': '(505) 917-9097',
 		'Email': 'philip@cheekfamily.org'
-	}
+	};
 
 	$scope.fieldFocus = function(){
 		if ($scope.send.email && $scope.send.email.length > 2){
@@ -24,7 +24,6 @@ angular.module('resumeApp').controller('contactController', function($scope, $ht
 		$scope.error = !validEmail();
 
 		if (!$scope.error){
-			console.log('this should work!', $scope.send)
 			$http.post('/sendMail', $scope.send);
 		}
 	};

@@ -7,9 +7,13 @@
 
 	<script src = 'app/app.js'></script>
 	<script src = 'app/services/cardService.js'></script>
+	<script src = 'app/services/projectService.js'></script>
+	<script src = 'app/services/routeService.js'></script>
+
 	<script src = 'app/controllers/menuController.js'></script>
 	<script src = 'app/controllers/contactController.js'></script>
 	<script src = 'app/controllers/projectController.js'></script>
+
 </head>
 
 <body ng-app = 'resumeApp'>
@@ -17,7 +21,16 @@
 		<div id = 'columnBody' ng-repeat = 'item in menuItems'>
 			<span class = 'square' ng-class = "{'selected': item.selected}">
 				<a class = 'mItem' ng-class = "{'selected': item.selected}" ng-click = "linkClicked(item)">{{item.name}}</a>
-			</span><br>
+			</span><br> 
+			<div class = 'subItems' ng-if = 'item.selected && item.subItems.length > 0'>
+				<ol>
+					<li ng-repeat ='sub in item.subItems'>
+						<a ng-click = 'selectSub(sub)' class = 'sItem' ng-class = '{under: sub.selected}'>
+							{{sub.name}}
+						</a>
+					</li>
+				</ol>
+			</div>
 		</div>
 	</div>
 	<div id = 'main'>

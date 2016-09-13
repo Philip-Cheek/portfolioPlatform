@@ -1,7 +1,7 @@
 <div id = 'projectContainer' ng-controller = 'projectController'>
 	<div class = 'projectList' ng-repeat = 'project in projects'>
 
-		<a class = 'pTitle' ng-click = 'project.open = !project.open'><i ng-class = "{'open':project.open}" class="fa fa-chevron-circle-right" aria-hidden="true"></i> <span class = 'under'>{{project.name}}</span></a>
+		<a class = 'pTitle' ng-click = 'project.open = !project.open; toggleProject(project)'><i ng-class = "{'open':project.open}" class="fa fa-chevron-circle-right" aria-hidden="true"></i> <span class = 'under'>{{project.name}}</span></a>
 
 
 		<div class = 'projectUnder'  ng-class = '{"underOpen":project.open}'>
@@ -38,11 +38,7 @@
 				</div>
 			</div>
 
-			<!-- <h2>Technology</h2>
-			<div class = 'tech' ng-repeat = '(techType, listed) in project.technology'>
-				<h3>{{techType}}:<h3>
-				<img class = 'gList' ng-repeat = 'logo in listed' ng-src = '{{logo}}'><br>
-			<div> -->
+			
 		</div>
 	</div>
 </div>

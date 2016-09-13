@@ -1,23 +1,28 @@
-angular.module('resumeApp').controller('menuController', function($scope, $location, cardService){
+angular.module('resumeApp').controller('menuController', function($scope, $location, cardService, routeService){
+	var listeners = {};
+
 	$scope.menuItems = [
 		{
 			'name': 'Home',
 			'selected': false,
-			'path': ''
+			'path': '',
+			'subItems': []
 		},
 		{
 			'name': 'Projects',
 			'selected': false,
-			'path': 'projects'
+			'path': 'projects',
+			'subItems': []
 		},
 		{
 			'name': 'Contact',
 			'selected': false,
-			'path': 'contact'
+			'path': 'contact',
+			'subItems': []
 		}
 	];
 
-	cardService.toggleCardServices($location.url() == '/');
+	init();
 
 	$scope.linkClicked = function(item){
 		if (!item.selected){
@@ -33,16 +38,15 @@ angular.module('resumeApp').controller('menuController', function($scope, $locat
 		}
 	}
 
-	$scope.$watch(function(){
-		return $location.url();
-	}, function(newLocation){
-		var location = newLocation.substring(1, $location.url().length);
-		cardService.toggleCardServices(!location);
+	$scope.selectSub = function(sub){
+		sub.selected = !sub.selected;
+		sub.callback(sub.name);
+		console.log(sub)
+	}
 
-		for (var i = 0; i < $scope.menuItems.length; i++){
-			$scope.menuItems[i].selected = $scope.menuItems[i].path == location;
-		}
-	});
-
+	function init(){
+		cardService.toggleCardServices($location.url() == '/');
+		routeService.enableRouteWatch($scope.menuItems);
+	}
 	
 });

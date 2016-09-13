@@ -4,7 +4,6 @@ angular.module('resumeApp').service('cardService', function($window){
 
 	service.toggleCardServices = function(enable){
 		var mainBody = document.getElementById("main");
-		console.log(enable)
 		if (enable){
 			document.addEventListener('mousemove', rotateCard);
 			mainBody.addEventListener("click", gitRedirect);
@@ -33,11 +32,9 @@ angular.module('resumeApp').service('cardService', function($window){
 	};
 
 	function monitorMouseOverlap(event){
- 		gitOverlap = eventGitOverlap(event);
- 		var shade;
- 		var mouse;
+ 		var shade, mouse;
 
- 		if (gitOverlap){
+ 		if (eventGitOverlap(event)){
  			shade = '#81b3d2';
  			mouse = 'pointer'
  		}else{
