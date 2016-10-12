@@ -19,6 +19,12 @@ angular.module('resumeApp').controller('menuController', function($scope, $locat
 			'selected': false,
 			'path': 'contact',
 			'subItems': []
+		},
+		{
+			'name': 'Skills',
+			'selected': false,
+			'path': 'skills',
+			'subItems': []
 		}
 	];
 

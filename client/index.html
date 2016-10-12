@@ -23,14 +23,15 @@
 				<a class = 'mItem' ng-class = "{'selected': item.selected}" ng-click = "linkClicked(item)">{{item.name}}</a>
 			</span><br> 
 			<div class = 'subItems' ng-if = 'item.selected && item.subItems.length > 0'>
-				<ol>
-					<li ng-repeat ='sub in item.subItems'>
+				<ul>
+					<li ng-repeat ='sub in item.subItems' >
 						<a ng-click = 'selectSub(sub)' class = 'sItem' ng-class = '{under: sub.selected}'>
 							{{sub.name}}
 						</a>
 					</li>
-				</ol>
+				</ul>
 			</div>
+			<div class = 'manualSpacer'></div>
 		</div>
 	</div>
 	<div id = 'main'>

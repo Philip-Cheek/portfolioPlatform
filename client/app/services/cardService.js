@@ -15,6 +15,7 @@ angular.module('resumeApp').service('cardService', function($window){
 
 	function gitRedirect(){
 		if (gitOverlap){
+			console.log('coo');
 			$window.location.href = 'https://github.com/Philip-Cheek';
 		}
 	}
@@ -33,8 +34,9 @@ angular.module('resumeApp').service('cardService', function($window){
 
 	function monitorMouseOverlap(event){
  		var shade, mouse;
+ 		gitOverlap = eventGitOverlap(event);
 
- 		if (eventGitOverlap(event)){
+ 		if (gitOverlap){
  			shade = '#81b3d2';
  			mouse = 'pointer'
  		}else{

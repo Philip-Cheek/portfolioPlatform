@@ -20,6 +20,10 @@ a:hover{
   text-decoration:underline;
 }
 
+li a.under{
+  color: #81b3d2;
+}
+
   #column{
     height:100%;
     width:33%;
@@ -36,6 +40,8 @@ a:hover{
       text-align: center;
     }
 
+    #columnBody *{
+    }
       a.mItem, a.mItem:visited, a.mItem:hover, a.mItem:active{
        /* -webkit-backface-visibility:hidden;
                 backface-visibility:hidden;*/
@@ -73,6 +79,20 @@ a.mItem:before,a.mItem:after{
   width:0;
   background:#d73444;
 }
+
+.manualSpacer{
+  height:1em;
+  width:1em;
+}
+
+.subItems{
+  margin-top: 1em;
+  color:white;
+}
+
+  .subItems ul{
+    list-style-type: circle !important;
+  }
 
 .square{
   /*box-sizing:border-box;*/

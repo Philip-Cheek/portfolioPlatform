@@ -9,7 +9,10 @@ angular.module('resumeApp', ['ngRoute'])
             })
             .when('/contact',{
                 templateUrl: 'app/partials/contact.html'
-            });
+            })
+            .when('/skills', {
+                templateUrl: 'app/partials/skills.html'
+            })
 
         $locationProvider
         	.html5Mode({

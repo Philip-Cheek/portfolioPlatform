@@ -28,7 +28,6 @@ angular.module('resumeApp').service('routeService', function($rootScope, $locati
 				if (newVal != oldVal){
 					console.log('newVal', newVal)
 					for (var i = 0; i < menu.length; i++){
-						console.log(menu[i]);
 						if (menu[i].name == 'Projects'){
 							var pSub = menu[i].subItems;
 							for (var iTwo = 0; iTwo < pSub.length; iTwo++){
@@ -39,8 +38,7 @@ angular.module('resumeApp').service('routeService', function($rootScope, $locati
 										change = true;
 									}
 								}
-
-								console.log('name, man', pSub[iTwo].name);
+								
 								pSub[iTwo].selected = change;
 							}
 						}
