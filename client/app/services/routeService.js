@@ -4,7 +4,7 @@ angular.module('resumeApp').service('routeService', function($rootScope, $locati
 
 	service.enableRouteWatch = function(menu){
 		listeners.routeWatch = $rootScope.$watch(function(){
-				return $location.url();
+			return $location.url();
 		}, function(newLocation){
 			var location = newLocation.substring(1, $location.url().length);
 			cardService.toggleCardServices(!location);
