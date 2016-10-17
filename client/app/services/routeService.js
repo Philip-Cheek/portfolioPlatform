@@ -17,7 +17,6 @@ angular.module('resumeApp').service('routeService', function($rootScope, $locati
 		});
 	}
 
-
 	function customSub(location, menu){
 		if (location == 'projects'){
 			injectPSub(menu);
@@ -26,7 +25,6 @@ angular.module('resumeApp').service('routeService', function($rootScope, $locati
 				return projectService.monitorOpen()
 			}, function(newVal, oldVal){
 				if (newVal != oldVal){
-					console.log('newVal', newVal)
 					for (var i = 0; i < menu.length; i++){
 						if (menu[i].name == 'Projects'){
 							var pSub = menu[i].subItems;
@@ -49,7 +47,6 @@ angular.module('resumeApp').service('routeService', function($rootScope, $locati
 		}else{
 			console.log(location);
 			if ('customSub' in listeners){
-				console.log('stop listening');
 				listeners.customSub();
 			}
 		};

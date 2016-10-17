@@ -1,51 +1,84 @@
 angular.module('resumeApp').service('physicsService', function(){
 	//persistent service data
 	var service = {}, 
-		screen = {}, 
 		objects = {},
+		constraints,
 		defOptions = {
-
+			visible: false,
+	        isStatic: false,
+	        density: .5,
+	        restitution: .8,
+        	friction: 1.01,
 		};
 
 	//globals
-	var main = document.getElementById('main'),
-		canvas, engine;
+	var main, home, canvas, engine, mouseConstraint;
 
 	//matterJS engine variables
 	var Engine = Matter.Engine, World = Matter.World,
 	    Body = Matter.Body, Bodies = Matter.Bodies,
 	    Common = Matter.Common, Composites = Matter.Composites,
-	    MouseConstraint = Matter.MouseConstraint,
+	    MouseConstraint = Matter.MouseConstraint;
+
 
 		
 	//creates environment
 	service.init = function(){
-		setDimensions();
-		setCanvas();
+		var self = this;
+		grabDomElements();
+		setDimensions(function(screen){
+			self.screen = screen;
+			
+			setCanvas(screen);
 
-		engine = createEngine();
-		engine.world.bodies = [];
+			engine = createEngine(screen);
+			engine.world.bodies = [];
 
-		var mouseConstraint = MouseConstraint.create(engine);
-		World.add(engine.world, mouseConstraint, setWalls());
+			mouseConstraint = MouseConstraint.create(engine);
+			World.add(engine.world, mouseConstraint)
+			World.add(engine.world, setWalls(screen));
+
+		});
 	};
 
 	//run the engine
 	service.run = function(){
+		console.log('called')
+		setRenderOptions();
 		Engine.run(engine);
 	};
 
 	service.updateObjectQueue = function(){
-		for (var item in object){
-			if !(object[item].world){
-				World.add(object[item].world);
-				object[item].world = true;
+		for (var item in objects){
+			var element = objects[item].obj
+			if (!objects[item].world && element){
+				var element = (objects[item].obj)
+				World.add(engine.world, element);
+				objects[item].world = true;
 			}
 		}
 	}
 
-	service.createContraint = function(body, x, y){
-		return Constraint.create({bodyA: objects[body], pointB: {x:x, y:y}});
+	service.addContraint = function(body, x, y){
+		var c = 0,
+			cParams = {};
+
+
+		for (var key in constraints){
+			if (key == body){
+				break;
+			}
+
+			c++;
+		}
+		var letter = String.fromCharCode('A'.charCodeAt() + c);
+		cParams.key = 'Body' + letter;
+		cParams.pointB = {
+			x: x,
+			y: y
+		}
+
+		constraints[body] = Constraint.create(cParams);
 	};
 
 	service.addCircle = function(key, radius, coord, spriteRender){
@@ -57,9 +90,9 @@ angular.module('resumeApp').service('physicsService', function(){
 				'sprite': spriteRender
 			}
 		}
-		object[key] = {
+		objects[key] = {
 			'world': false,
-			'obj': Bodies.circle(coord.x, coord.y, radius, options);
+			'obj': Bodies.circle(coord.x, coord.y, radius, options)
 		}
 
 		if ('render' in defOptions){
@@ -70,7 +103,7 @@ angular.module('resumeApp').service('physicsService', function(){
 	service.addRectangle = function(key, dimen, coord, spriteRender){
 		var options = defOptions;
 
-		if (texture){
+		if (spriteRender){
 			options.render = {
 				'strokeStyle': '#333333',
 				'sprite': spriteRender
@@ -84,32 +117,36 @@ angular.module('resumeApp').service('physicsService', function(){
 		}
 	}
 
-	function setWalls(){
+	function setWalls(screen){
 		var offset = 20,
 		    options = { 
-		        isStatic: true,
+		        isStatic: false,
 		        render: {
 		            visible: true
 		        }
-		    };
+		    },
+		    otherOptions = {
+		    	isStatic: true,
+		        render: {
+		            visible: true
+		        }
+		    }
 
 		return [
-			Bodies.rectangle(screenWidth/2, 0, screenWidth, 1, options),
-		    Bodies.rectangle(400, screenHeight + 25, 800.5 + 2 * offset, 50.5, options),
-		    Bodies.rectangle(800 + offset, 300, 50.5, 600.5 + 2 * offset, options),
-		    Bodies.rectangle(-offset, 300, 50.5, 600.5 + 2 * offset, options)
+			Bodies.rectangle(200, 0, 50, 60, options),
+			Bodies.rectangle(screen.width/2, screen.height - 10 ,screen.width, 10, otherOptions)
 		]
 	}
 
 
-	function createCircle(key){
-		objects[key] = 
-	}
+	// function createCircle(key){
+	// 	objects[key] = 
+	// }
 
 
-	function createEngine(){
-		return Engine.create(
-			document.body, {
+	function createEngine(screen){
+		return Engine.create(home, 
+			{
 				render: {
 				canvas: canvas,
 				options: {
@@ -119,20 +156,38 @@ angular.module('resumeApp').service('physicsService', function(){
 				  height: screen.height
 				}
 			}
-		);
+		});
 	}
 
 
-	function setDimensions(){
-		var dimensions = main.getBoundingRect();
-		screen.height = dimensions.height;
-		screen.width = dimensions.width;
+	function setDimensions(callback){
+		var dimensions = main.getBoundingClientRect();
+		console.log(dimensions)
+		callback({
+			'height': dimensions.height,
+			'width': dimensions.width
+		});
 	}
 
-	function setCanvas(){
-		canvas = document.getElementById('main');
+	function setRenderOptions(){
+		var renderOptions = engine.render.options;
+
+		renderOptions.background = 'none';
+		renderOptions.showAngleIndicator = false;
+		renderOptions.wireframes = true;
+		renderOptions.showCollsions = false;
+		renderOptions.showVelocity = false;
+	}
+
+	function setCanvas(screen){
+		canvas = document.getElementById('canvas');
 		canvas.height = screen.height;
 		canvas.width = screen.width;
+	}
+
+	function grabDomElements(){
+		main = document.getElementById('main');
+		home = document.getElementById('sHome');
 	}
 
 
