@@ -21,6 +21,7 @@
 
 <body ng-app = 'resumeApp'>
 	<div id = 'column' ng-controller = 'menuController'>
+		<div id = 'backer'></div>
 		<div id = 'columnBody' ng-repeat = 'item in menuItems'>
 			<span class = 'square' ng-class = "{'selected': item.selected}">
 				<a class = 'mItem' ng-class = "{'selected': item.selected}" ng-click = "linkClicked(item)">{{item.name}}</a>

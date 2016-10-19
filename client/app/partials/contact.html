@@ -1,15 +1,25 @@
 <div id = 'contactWrapper' ng-controller = 'contactController'>
-		<a class = 'pTitle' ng-click = 'info = !info'><i ng-class = "{'open':info}" class="fa fa-chevron-circle-right" aria-hidden="true"></i>  <span class = 'under'>Contact Info</span><a>
-		<div class = 'sUnder' ng-class = "{'revealed': info}">
-			<p ng-repeat = '(type, info) in contact'><b>{{type}}:</b> {{info}}</p>
+		<a class = 'pTitle' ng-click = 'info = !info'><i ng-class = "{'open':info}" class="fa fa-chevron-circle-right" aria-hidden="true"></i>  <span class = 'under'>Contact Info</span></a>
+		<div id = 'cInfo' class = 'sUnder' ng-class = "{'revealed': info}">
+			<p ng-repeat = '(type, info) in contact'><b><i class="{{info.logo}}" aria-hidden="true"></i> {{type}}:</b> {{info.cInfo}}</p>
 		</div>
 			<br>
-		<a class = 'pTitle' ng-click = 'field = !field'><i ng-class = "{'open':field}" class="fa fa-chevron-circle-right" aria-hidden="true"></i>  <span class = 'under'>Contact Field</span><a>
-		<div class = 'sUnder' ng-class = "{'revealed': field}">
-			Name: <input type = 'textField' ng-model = 'send.person' ng-focus="fieldFocus()"><br>
-			<p ng-if = "error">Invalid Email</p>
-			Email: <input type = 'textField' ng-model = 'send.email' ng-change = 'updateEmail()'><br>
-			Message: <textarea ng-model = 'send.message' ng-focus="fieldFocus()" send.name = '' ></textarea>
+		<a class = 'pTitle' ng-click = 'field = !field'>
+			<i ng-class = "{'open':field}" class="fa fa-chevron-circle-right" aria-hidden="true"></i>  <span class = 'under'>Contact Field</span></a>
+		<div id = 'cField' class = 'sUnder' ng-class = "{'cRevealed': field}">
+			<p ng-if = "error" style= "color:red">Invalid Email</p>
+			<table>
+				<tr>
+					<td>Name: </td>
+					<td><input type = 'textField' ng-model = 'send.person' ng-focus="fieldFocus()"></td>
+				</tr>
+				<tr>
+					<td>Email: </td>
+					<td><input type = 'textField' ng-model = 'send.email' ng-change = 'updateEmail()'></td>
+				</tr>
+			</table>
+		
+			Message: <br><br><textarea ng-model = 'send.message' ng-focus="fieldFocus()" send.name = '' ></textarea>
 			<button ng-click = 'submit(); sent = true' ng-if = '!sent'>Send</button>
 			<p class = 'thanks' ng-if = 'sent'>Thanks! I'm excited to hear from you!</p>
 		</div>

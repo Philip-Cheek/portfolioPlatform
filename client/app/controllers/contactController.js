@@ -4,9 +4,19 @@ angular.module('resumeApp').controller('contactController', function($scope, $ht
 	};
 
 	$scope.contact = {
-		'Phone': '(505) 917-9097',
-		'Email': 'philip@cheekfamily.org'
+		'Phone': {
+			'cInfo':'(505) 917-9097',
+			'logo': "fa fa-phone"
+		},
+
+		'Email': {
+			'cInfo':'philip@cheekfamily.org',
+			'logo': 'fa fa-envelope'
+		}
 	};
+
+	$scope.info = true;
+	$scope.field = true;
 
 	$scope.fieldFocus = function(){
 		if ($scope.send.email && $scope.send.email.length > 2){

@@ -32,9 +32,14 @@ li a.under{
     box-shadow: .3em 0em 10px #888888;
   }
 
+  #backer{
+    height: 10%;
+  }
+
+
     #columnBody{
       margin:0 auto;
-      margin-top:1em;
+      margin-top: 1em;
       font-family: Arial;
       font-size:1em;
       text-align: center;
@@ -283,10 +288,12 @@ a.mItem:before,a.mItem:after{
     padding:.3em;
     color:#22313F;
     font-family: 'Comfortaa', cursive;
+    border-radius: .35em;
   }
 
   .projectList{
     margin-bottom:1.35em;
+    margin-right: .38em;
   }
 
   .projectUnder{
@@ -397,7 +404,71 @@ a.mItem:before,a.mItem:after{
   transition: max-height .35s ease;
 }
 
+#legib{
+  position: absolute;
+  top:10%;
+  left:55%;
+  font-size: 2.5em;
+  opacity:0;
+}
+
+#contactWrapper{
+  font-family: arial;
+}
+  #cInfo p{
+    margin: .5em;
+    margin-left:3em;
+  }
+
+#contactWrapper table{
+  padding:1em;
+}
+
+#contactWrapper table tr td{
+  height:2em;
+}
 
 
+#contactWrapper table input{
+  padding:.3em;
+  width:20em;
+}
+
+#contactWrapper input, #contactWrapper textarea{
+  border-radius: 7%;
+  border:.15em solid gray;
+}
+
+.cRevealed{
+  max-height: 35em;
+  transition: max-height .35s ease;
+}
+
+#cField textarea{
+  height:15em;
+  width:50em;
+  padding:1em;
+}
+
+#cField button{
+  display: block;
+  font-size:2em;
+  color:#edf2f4;
+  background:#22313F;
+  transition: color .3s, background .3s;
+  padding:.3em;
+  box-shadow: 5px 10px 15px 0px rgba(0,0,0,0.75);
+  margin-bottom: 1em;
+  border:none;
+  border-radius: 10%;
+  margin-top:.34em;
+  margin-left: 14em;
+}
+
+#cField button:hover{
+  cursor:pointer;
+  color:white;
+  background:#81b3d2;
+}
 
 
