@@ -1,9 +1,10 @@
 angular.module('resumeApp').service('cardService', function($window){
-	var service = {};
-	var gitOverlap = false;
+	var service = {},
+		gitOverlap = false;
 
 	service.toggleCardServices = function(enable){
 		var mainBody = document.getElementById("main");
+
 		if (enable){
 			document.addEventListener('mousemove', rotateCard);
 			mainBody.addEventListener("click", gitRedirect);
@@ -62,11 +63,11 @@ angular.module('resumeApp').service('cardService', function($window){
  	}
 
 	function findRotationDegrees(event){
-		var containerWidth = (document.getElementById('main').offsetWidth) * 1.9;
-		var containerHeight =  document.getElementById('main').offsetHeight;
+		var containerWidth = (document.getElementById('main').offsetWidth) * 1.9,
+			containerHeight =  document.getElementById('main').offsetHeight;
 
-		var ax = (containerWidth/2- event.pageX)/-20;
-		var ay = (containerHeight/2- event.pageY)/10;
+		var ax = (containerWidth/2- event.pageX)/-20,
+			ay = (containerHeight/2- event.pageY)/10;
 
 		return "rotateY(" + ax + "deg) rotateX(" + ay + "deg)"
 

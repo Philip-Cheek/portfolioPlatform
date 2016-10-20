@@ -1,49 +1,26 @@
 angular.module('resumeApp').controller('skillsController', function($scope, physicsService){
 
-	$scope.skills = [{
-		'type': 'Language',
-		'entries': {
-			'name': 'swift',
-			'level': 'experienced',
-			'physics': {'t': 'circle', 'n': 'swiftball', 'r': 50, 
-				'c': [205, -350], 's': 50/107.5}
-		}, {
-			'name': 'javascript',
-			'level': 'experienced',
-			'physics': {'t': 'rectangle', 'n': 'javascript', 'w': 150 , 'h':150, 
-				'c': [520, 0], 's': 150/300}
-		},{
-			'name': 'python',
-			'level': 'experienced',
-			'physics': {'t': 'rectangle', 'n': 'python', 'w': 120.4 , 'h':182.4, 
-				'c': [220, 0], 's': .4}
-		},{
-			'name': 'python',
-			'level': 'experienced',
-			'physics': {'t': 'rectangle', 'n': 'python', 'w': 120.4 , 'h':182.4, 
-				'c': [220, 0], 's': .4}
-		}
-	},{
-		'type':'Database',
-		'entries': {
-			'name': 'MongoDB',
-			'level': 'experienced',
-		},{
-			'name': 'MySql',
-			'level': 'experienced',
-			'physics': {'t': 'circle', 'n': 'sql', 'r': 70, 
-				'c': [520, -300], 's': 70/231.5}
-		}
-	},{
-		'type': 'Framework',
-		'entries': {
-			'name': 'AngularJS',
-			'level': 'experienced'
-		}
-	}
-
+	var haltRequest = false;
+	$scope.skills = [];
+	$scope.view= 'Legible';
+	
+	setSkills();
 	initPhysics();
 	setLegibleLink();
+
+	$scope.legibleToggle = function(){
+		haltRequest = false;
+		if ($scope.view == 'Legible'){
+			$scope.view = 'Physics'
+			physicsService.clear();
+		}else{
+			resetLegible();
+			$scope.view = 'Legible'
+			setSkills();
+			initPhysics();
+			setLegibleLink();
+		}
+	}
 
 	function initPhysics(){
 		physicsService.init();
@@ -55,7 +32,7 @@ angular.module('resumeApp').controller('skillsController', function($scope, phys
 
 	function setMongoBridge(){
 		var h = physicsService.screen.height;
-		var w = physicsService.screen.width;
+		var w = physicsService.screen.width * .95;
 
 		physicsService.addRectangle('mongo', {
 			'width': 400,
@@ -68,221 +45,170 @@ angular.module('resumeApp').controller('skillsController', function($scope, phys
 		}, 2);
 
 		physicsService.addConstraint('mongo', w/2 - 50, h - 20);
-		physicsService.addConstraint('mongo', w/2 + 50, h-20);
+		physicsService.addConstraint('mongo', w/2 + 50, h - 20);
 
+	}
+
+	function resetLegible(){
+		haltRequest = true;
+		var linked = document.getElementById('legib');
+		if (linked.style.opacity = 1){
+			linked.style.opacity = 0;
+		}
 	}
 
 	function setLegibleLink(){
 		var opacity = 0,
 			link = document.getElementById('legib'),
 			legib = window.requestAnimationFrame(legilize);
-		
 		window.cancelAnimationFrame(legib);
 		function legilize(){
-			console.log(opacity);
 			link.style.opacity = opacity;
-			if (opacity <= 1){
+			if (opacity <= 1 && !haltRequest){
 				window.requestAnimationFrame(legilize);
+			}else{
+				if ($scope.view == 'Legible' && haltRequest){
+					link.style.opacity = 0;
+				}
+				haltRequest = false;
 			};
 			opacity += .007;
 		}
 
 		setTimeout(function(){
+			haltRequest = false;
 			legilize();
 		}, 700)
 	};
 
 
 	function addFallingSkills(){
-		// var circles = [
-		// 	{'name': 'swiftball', 'r': 50, 'c': [220, -350], 's': 50/107.5},
+		for (var type in $scope.skills){
+			var skills = $scope.skills[type].entries
+			for (var i = 0; i < skills.length; i++){
+				if ('physics' in skills[i]){
+					var p = skills[i].physics,
+						tUrl = '../resources/images/' + p.n + '.png';
 
+					if (p.t == 'circle'){
+						physicsService.addCircle(p.n, p.r, {
+							'x': p.c[0],
+							'y': p.c[1]
+						},{
+							'texture': tUrl,
+							'xScale': p.s,
+							'yScale': p.s
+						});
+					}else if (p.t == 'rect'){
+						physicsService.addRectangle(p.n,{
+							'width': p.d[0],
+							'height': p.d[1]
+						},{
+							'x': p.c[0],
+							'y': p.c[1]
+						},{
+							'texture': tUrl,
+							'xScale': p.s,
+							'yScale': p.s
+						})
+					}
+				}
+			}
+		}
+	}
 
-		// }
+	function setSkills(){
+		$scope.skills = [{
+			'type': 'Languages',
+			'entries': [{
+				'name': 'Swift',
+				'level': 'Experienced',
+				'physics': {'t': 'circle', 'n': 'swiftball', 'r': 50, 
+					'c': [205, -350], 's': 50/107.5}
+			},{
+				'name': 'Javascript',
+				'level': 'Experienced',
+				'physics': {'t': 'rect', 'n': 'javascript', 'd': [150,150],
+					'c': [540, 0], 's': 150/300}
+			},{
+				'name': 'Python',
+				'level': 'Experienced',
+				'physics': {'t': 'rect', 'n': 'python', 'd': [120.4,182.4], 
+					'c': [220, 0], 's': .4}
+			},{
+				'name': 'Objective C',
+				'level': 'Apprentice',
+				'physics': {'t': 'circle', 'n': 'objectivec', 'r': 150 *.3, 
+					'c': [605, -320], 's': .3}
+			}]
+		},{
+			'type':'Databases',
+			'entries': [{
+				'name': 'MongoDB',
+				'level': 'Experienced',
+			},{
+				'name': 'MySql',
+				'level': 'Experienced',
+				'physics': {'t': 'circle', 'n': 'sqlng', 'r': 70, 
+					'c': [520, -300], 's': 70/231.5}
+		 	}]
+		},{
+			'type': 'Frameworks',
+			'entries': [{
+				'name': 'AngularJS',
+				'level': 'Experienced',
+				'physics': {'t': 'rect', 'n': 'angular', 'd': [920 * .5, 150 * .5],
+					'c': [400, -600], 's': .5}
+			},{
+				'name': 'Django',
+				'level': 'Experienced',
+				'physics': {'t': 'circle', 'n': 'django', 'r': (348/2)*.5,
+					'c': [590, -850], 's': .5}
+			},{
+				'name': 'Flask',
+				'level': 'Experienced',
+				'physics': {'t': 'rect', 'n': 'flask', 'd': [120, 74],
+					'c': [205, -420], 's': 1}
+			},{
+				'name': 'Node.js',
+				'level': 'Experienced',
+				'physics': {'t': 'rect', 'n': 'node', 'd': [483 * .8, 133 * .8],
+					'c': [545, -800], 's': .8}
 
-		physicsService.addCircle('swiftball', 50, {
-			'x': 220,
-			'y': -350
-		}, {
-			'texture': '../resources/images/swiftball.png',
-            'xScale': 50/107.5,
-            'yScale': 50/107.5
-		});
+			}]
+		},{
+			'type': 'Libraries',
+			'entries': [{
+				'name': 'React',
+				'level': 'Apprentice',
+				'physics': {'t': 'circle', 'n': 'react', 'r': (256/2)*.5, 
+					'c': [290, -850], 's': .5}
+			},{
+				'name': 'Socket.IO',
+				'level': 'Experienced',
+				'physics': {'t': 'rect', 'n': 'socket', 'd': [394 * .3, 134 * .3], 
+					'c': [290, -850], 's': .3}
+			}]
+		},{
+			'type': 'Markup & Style Sheets',
+			'entries': [{
+				'name': 'HTML',
+				'level': 'Experienced',
+				'physics': {'t': 'rect', 'n': 'html', 'd': [203 * .4, 150 * .4],
+					'c': [720, -40], 's': .4}
+			},{
+				'name': 'CSS',
+				'level': 'Experienced',
+				'physics': {'t': 'rect', 'n': 'css', 'd': [213 * .4, 150 * .4],
+					'c': [320, -890], 's': .4}
+			},{
+				'name': 'Git',
+				'level': 'Experience',
+				'physics': {'t': 'rect', 'n': 'git', 'd': [241 * .4, 243 * .4],
+				'c': [120, -264], 's': .4}
+			}]
 
-		physicsService.addCircle('sql', 70, {
-			'x': 520,
-			'y': -300
-		}, {
-			texture: '../resources/images/sqlng.png',
-            xScale: 70/231.5,
-            yScale: 70/231.5
-		});
-
-		
-		physicsService.addRectangle('javascript', {
-			'width': 150,
-			'height': 150
-		}, {
-			'x': 520,
-			'y': 0
-		}, {
-			texture: '../resources/images/javascript.png',
-			xScale: 150/300,
-        	yScale: 150/300
-		});
-
-		physicsService.addRectangle('python', {
-			'width': 120.4,
-			'height': 182.4
-		}, {
-			'x': 220,
-			'y': 0
-		}, {
-			texture: '../resources/images/python.png',
-			xScale: .4,
-        	yScale: .4
-		});
-
-		physicsService.addRectangle('angular', {
-			'width': 920 * .5,
-			'height': 150 * .5
-		}, {
-			'x': 400,
-			'y': -600
-		}, {
-			texture: '../resources/images/angular.png',
-			xScale: .5,
-        	yScale: .5
-		});
-
-		physicsService.addCircle('django', (348/2)*.5, {
-			'x': 590,
-			'y': -850
-		}, {
-			texture: '../resources/images/django.png',
-            xScale: .5,
-            yScale: .5
-		});
-
-		physicsService.addCircle('django', (348/2)*.5, {
-			'x': 590,
-			'y': -850
-		}, {
-			texture: '../resources/images/django.png',
-            xScale: .5,
-            yScale: .5
-		});
-
-		physicsService.addCircle('react', (256/2)*.5, {
-			'x': 290,
-			'y': -850
-		}, {
-			texture: '../resources/images/react.png',
-            xScale: .5,
-            yScale: .5
-		});
-
-		physicsService.addRectangle('html', {
-			'width': 203 * .4,
-			'height': 289 * .4
-		}, {
-			'x': 720,
-			'y': -40
-		}, {
-			texture: '../resources/images/html.png',
-			xScale: .4,
-        	yScale: .4
-		});
-
-		physicsService.addRectangle('css', {
-			'width': 213 * .4,
-			'height': 289 * .4
-		}, {
-			'x': 320,
-			'y': -890
-		}, {
-			texture: '../resources/images/css.png',
-			xScale: .4,
-        	yScale: .4
-		});
-
-		physicsService.addRectangle('git', {
-			'width': 213 * .4,
-			'height': 289 * .4
-		}, {
-			'x': 120,
-			'y': -264,
-		}, {
-			texture: '../resources/images/git.png',
-			xScale: .4,
-        	yScale: .4
-		});
-
-		physicsService.addRectangle('flask', {
-			'width': 120,
-			'height': 74
-		}, {
-			'x': 205,
-			'y': -420,
-		}, {
-			texture: '../resources/images/flask.png',
-		});
-
-		physicsService.addCircle('objectivec', 150 * .3, {
-			'x': 605,
-			'y': -320,
-		}, {
-			texture: '../resources/images/objectivec.png',
-			xScale: .3,
-        	yScale: .3
-		});
-
-		physicsService.addRectangle('socket', {
-			'width': 394 * .3,
-			'height': 134 * .3
-		}, {
-			'x': 245,
-			'y': -620,
-		}, {
-			texture: '../resources/images/socket.png',
-			xScale: .3,
-        	yScale: .3
-		});
-
-		physicsService.addRectangle('socket', {
-			'width': 394 * .3,
-			'height': 134 * .3
-		}, {
-			'x': 245,
-			'y': -620,
-		}, {
-			texture: '../resources/images/socket.png',
-			xScale: .3,
-        	yScale: .3
-		});
-
-		physicsService.addRectangle('ssh', {
-			'width': 85,
-			'height': 85
-		}, {
-			'x': 745,
-			'y': -510,
-		}, {
-			texture: '../resources/images/ssh.png',
-		});
-
-		physicsService.addRectangle('node', {
-			'width': 483 * .8,
-			'height': 133 * .8
-		}, {
-			'x': 545,
-			'y': -800,
-		}, {
-			texture: '../resources/images/node.png',
-			xScale: .8,
-        	yScale: .8
-		});
-		
-	};
+		}];
+	}
 
 });

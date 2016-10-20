@@ -1,6 +1,23 @@
 <div id = 'sHome' ng-controller = 'skillsController'>
-	<div id = 'legib'>
-		<p >See Legible View</p>
+	<div id = 'legib' ng-click = 'legibleToggle(); legib = !legib' ng-class = '{"bottom":legib}'>
+		<p >See {{view}} View</p>
+	</div>
+
+	<div ng-if = 'legib' id = 'legList'>
+		<div class = 'legType' ng-repeat = 'skill in skills'>
+			<a class = 'pTitle' ng-click = 'info = !info'><i ng-class = "{'open':info}" class="fa fa-chevron-circle-right" aria-hidden="true"></i>  <span class = 'under'>{{skill.type}}</span></a>
+			<div class = 'sUnder' ng-class = "{'revealed': info}">
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Level</th>
+					<tr ng-repeat = 'entry in skill.entries'>
+						<td>{{entry.name}}</td>
+						<td>{{entry.level}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</div>
 	<canvas id = 'canvas'></canvas>
 </div>

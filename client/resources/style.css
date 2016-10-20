@@ -400,18 +400,40 @@ a.mItem:before,a.mItem:after{
 }
 
 .revealed{
-   max-height: 10em;
+   max-height: 14em;
   transition: max-height .35s ease;
 }
 
-#legib{
-  position: absolute;
-  top:10%;
-  left:55%;
-  font-size: 2.5em;
-  opacity:0;
+.bottom{
+  left:62% !important;
+  font-size: 1.8em !important;
 }
 
+#legib{
+  font-family: 'Comfortaa', cursive;
+  opacity:0;
+  padding:.5em;
+  position: absolute;
+  top:10%;
+  left:30%;
+  color: #22313F;
+  font-size: 2.5em;
+  background: rgba(129, 179, 210, .5);
+  border: .2em solid white;
+  border-radius:10%;
+  box-shadow: 5px 10px 15px 0px rgba(0,0,0,0.75);
+  transition:color .3s, background .3s, left .3s, font-size .3s;
+}
+
+#legib:hover{
+  background:rgba(34, 49, 63, .8);
+  cursor: pointer;
+  color:white;
+}
+
+#legib p{
+  text-shadow: 4px 4px 2px rgba(150, 150, 150, .48);
+}
 #contactWrapper{
   font-family: arial;
 }
@@ -470,5 +492,30 @@ a.mItem:before,a.mItem:after{
   color:white;
   background:#81b3d2;
 }
+
+#sHome{
+  height:100%;
+  overflow-y:scroll;
+  position:relative;
+}
+
+#legList{
+  margin:1em;
+  margin-bottom: 8em;
+}
+    #legList table{
+      margin-top: 1em;
+      margin-left:3em;
+      min-width:35%;
+      background: #C4CBCF;
+      font-family: arial;
+  }
+
+  #legList table *{
+    border:1px #EDF2F4 solid;
+    padding:.3em;
+  }
+
+
 
 

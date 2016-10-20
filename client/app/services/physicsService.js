@@ -39,6 +39,12 @@ angular.module('resumeApp').service('physicsService', function(){
 		Engine.run(engine);
 	};
 
+	service.clear = function(){
+		World.clear(engine.world)
+		Engine.clear(engine);
+		clearCanvas();
+	}
+
 	service.updateWorldQueue = function(){
 		var oQueue = [],
 			cQueue = [];
@@ -176,8 +182,15 @@ angular.module('resumeApp').service('physicsService', function(){
 
 	function setCanvas(screen){
 		canvas = document.getElementById('canvas');
-		canvas.height = screen.height;
-		canvas.width = screen.width;
+		canvas.style.height = screen.height;
+		canvas.style.width = screen.width * .975;
+		canvas.style.display = 'initial'
+	}
+
+	function clearCanvas(){
+		var context = canvas.getContext('2d');
+		context.clearRect(0,0, canvas.height, canvas.width);
+		canvas.style.display= 'none';
 	}
 
 	function grabDomElements(){
