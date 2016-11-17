@@ -7,23 +7,25 @@ angular.module('resumeApp').controller('menuController', function($scope, $locat
 			'selected': false,
 			'path': '',
 			'subItems': []
-		},
-		{
+		},{
+			'name': 'Skills',
+			'selected': false,
+			'path': 'skills',
+			'subItems': []
+		},{
 			'name': 'Projects',
 			'selected': false,
 			'path': 'projects',
 			'subItems': []
-		},
-		{
+		},{
 			'name': 'Contact',
 			'selected': false,
 			'path': 'contact',
 			'subItems': []
-		},
-		{
-			'name': 'Skills',
+		},{
+			'name': 'About',
 			'selected': false,
-			'path': 'skills',
+			'path': 'about',
 			'subItems': []
 		}
 	];
@@ -31,8 +33,8 @@ angular.module('resumeApp').controller('menuController', function($scope, $locat
 	init();
 
 	$scope.linkClicked = function(item){
+		console.log(item)
 		if (!item.selected){
-			console.log(item.name)
 			for (var i = 0; i < $scope.menuItems.length; i++){
 
 				if ($scope.menuItems[i].name == item.name){
@@ -47,7 +49,6 @@ angular.module('resumeApp').controller('menuController', function($scope, $locat
 	$scope.selectSub = function(sub){
 		sub.selected = !sub.selected;
 		sub.callback(sub.name);
-		console.log(sub)
 	}
 
 	function init(){

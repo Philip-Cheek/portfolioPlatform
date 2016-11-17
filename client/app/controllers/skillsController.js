@@ -170,7 +170,7 @@ angular.module('resumeApp').controller('skillsController', function($scope, phys
 				'physics': {'t': 'rect', 'n': 'flask', 'd': [120, 74],
 					'c': [205, -420], 's': 1}
 			},{
-				'name': 'Node.js',
+				'name': 'Node.js (runtime)',
 				'level': 'Experienced',
 				'physics': {'t': 'rect', 'n': 'node', 'd': [483 * .8, 133 * .8],
 					'c': [545, -800], 's': .8}
@@ -190,7 +190,7 @@ angular.module('resumeApp').controller('skillsController', function($scope, phys
 					'c': [290, -850], 's': .3}
 			}]
 		},{
-			'type': 'Markup & Style Sheets',
+			'type': 'Misc.',
 			'entries': [{
 				'name': 'HTML',
 				'level': 'Experienced',

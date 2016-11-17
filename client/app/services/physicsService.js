@@ -51,7 +51,6 @@ angular.module('resumeApp').service('physicsService', function(){
 
 		for (var key in objects){
 			var element = objects[key];
-			console.log(element)
 			if (!element.world){
 				oQueue.push(element.obj);
 				objects[key].world = false;
@@ -60,7 +59,6 @@ angular.module('resumeApp').service('physicsService', function(){
 		World.add(engine.world, oQueue);
 
 		for (var i = constraints.length - 1; i >= 0; i--){
-			console.log(constraints[i]);
 			cQueue.push(constraints.pop());
 		}
 
@@ -121,7 +119,6 @@ angular.module('resumeApp').service('physicsService', function(){
 				'sprite': spriteRender
 			}
 		}
-		console.log("COORD",coord)
 		objects[key] = {
 			'world': false,
 			'obj': Bodies.rectangle(coord.x, coord.y, dimen.width, dimen.height, options)

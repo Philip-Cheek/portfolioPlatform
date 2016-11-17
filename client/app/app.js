@@ -13,6 +13,9 @@ angular.module('resumeApp', ['ngRoute'])
             .when('/skills', {
                 templateUrl: 'app/partials/skills.html'
             })
+            .when('/about', {
+                templateUrl: 'app/partials/about.html'
+            });
 
         $locationProvider
         	.html5Mode({

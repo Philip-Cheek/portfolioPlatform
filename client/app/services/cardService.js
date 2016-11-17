@@ -16,7 +16,6 @@ angular.module('resumeApp').service('cardService', function($window){
 
 	function gitRedirect(){
 		if (gitOverlap){
-			console.log('coo');
 			$window.location.href = 'https://github.com/Philip-Cheek';
 		}
 	}

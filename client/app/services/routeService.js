@@ -45,7 +45,6 @@ angular.module('resumeApp').service('routeService', function($rootScope, $locati
 			}, true);
 
 		}else{
-			console.log(location);
 			if ('customSub' in listeners){
 				listeners.customSub();
 			}
