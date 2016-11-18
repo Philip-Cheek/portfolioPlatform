@@ -101,7 +101,7 @@ angular.module('resumeApp').service('projectService', function(){
 				'status':false,
 			},
 			'gallery': [
-				'../resources/images/gkb.png',
+				'https://s3.amazonaws.com/prosepair/gkb.png',
 			],
 			'stack': [
 				'Django',
@@ -151,7 +151,7 @@ angular.module('resumeApp').service('projectService', function(){
 
 			},
 			'gallery': [
-				'../resources/images/portScreen.png',
+				'https://s3.amazonaws.com/prosepair/portScreen.png',
 			],
 			'stack': [
 				'Node.js',
@@ -212,7 +212,7 @@ angular.module('resumeApp').service('projectService', function(){
 				'status':false,
 			},
 			'gallery': [
-				'../resources/images/litTemp.png',
+				'https://s3.amazonaws.com/prosepair/litTemp.png',
 			],
 			'stack': [
 				'Swift (Native iOS)',

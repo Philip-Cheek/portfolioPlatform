@@ -1,4 +1,6 @@
-angular.module('resumeApp').controller('contactController', function($scope, $http){
+angular.module('resumeApp').controller('contactController', 
+['$scope', '$http', function($scope, $http){
+
 	$scope.send = {
 		'email': ''
 	};
@@ -46,4 +48,4 @@ angular.module('resumeApp').controller('contactController', function($scope, $ht
 	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    return re.test($scope.send.email);
 	}
-});
+}]);

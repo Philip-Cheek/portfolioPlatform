@@ -1,4 +1,7 @@
-angular.module('resumeApp').service('routeService', function($rootScope, $location, cardService, projectService){
+angular.module('resumeApp').service('routeService', 
+['$rootScope', '$location', 'cardService', 'projectService',
+function($rootScope, $location, cardService, projectService){
+
 	var service = {};
 	var listeners = {};
 
@@ -75,4 +78,4 @@ angular.module('resumeApp').service('routeService', function($rootScope, $locati
 	}
 
 	return service;
-});
+}]);

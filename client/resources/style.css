@@ -542,6 +542,23 @@ a.mItem:before,a.mItem:after{
   box-shadow: 9px 13px 26px -3px rgba(0,0,0,0.75);
 }
 
+#loadSkills{
+  opacity:.5;
+  position: absolute;
+  margin-left: 30%;
+  margin-top:23%;
+  font-family: arial
+}
+
+  #loadSkills i{
+     font-size: 12em;
+     text-align: center;
+
+  }
+
+  #loadSkills p{
+    margin-left: -.8em;
+  }
 
 
 

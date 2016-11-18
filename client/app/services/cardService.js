@@ -1,4 +1,4 @@
-angular.module('resumeApp').service('cardService', function($window){
+angular.module('resumeApp').service('cardService', ['$window', function($window){
 	var service = {},
 		gitOverlap = false;
 
@@ -73,4 +73,4 @@ angular.module('resumeApp').service('cardService', function($window){
 	}
 
 	return service;
-});
+}]);

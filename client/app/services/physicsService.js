@@ -160,7 +160,6 @@ angular.module('resumeApp').service('physicsService', function(){
 
 	function setDimensions(callback){
 		var dimensions = main.getBoundingClientRect();
-		console.log(dimensions)
 		callback({
 			'height': dimensions.height,
 			'width': dimensions.width

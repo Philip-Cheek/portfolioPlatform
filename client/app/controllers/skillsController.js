@@ -1,12 +1,17 @@
-angular.module('resumeApp').controller('skillsController', function($scope, physicsService){
+angular.module('resumeApp').controller('skillsController', 
+['$scope', 'physicsService', 'imageService', function($scope, physicsService, imageService){
 
 	var haltRequest = false;
 	$scope.skills = [];
 	$scope.view= 'Legible';
 	
 	setSkills();
-	initPhysics();
-	setLegibleLink();
+	imageService.onCacheComplete(function(){
+		var loadSkills = document.getElementById('loadSkills');
+		loadSkills.style.visibility = 'hidden'
+		initPhysics();
+		setLegibleLink();
+	});
 
 	$scope.legibleToggle = function(){
 		haltRequest = false;
@@ -41,7 +46,7 @@ angular.module('resumeApp').controller('skillsController', function($scope, phys
 			'x': w/2,
 			'y': h/1.3
 		}, {
-			texture: '../resources/images/mlogo.png'
+			texture: 'https://s3.amazonaws.com/prosepair/mlogo.png'
 		}, 2);
 
 		physicsService.addConstraint('mongo', w/2 - 50, h - 20);
@@ -85,10 +90,10 @@ angular.module('resumeApp').controller('skillsController', function($scope, phys
 	function addFallingSkills(){
 		for (var type in $scope.skills){
 			var skills = $scope.skills[type].entries
-			for (var i = 0; i < skills.length; i++){
+			for (var i =0; i < skills.length; i++){
 				if ('physics' in skills[i]){
 					var p = skills[i].physics,
-						tUrl = '../resources/images/' + p.n + '.png';
+						tUrl = 'https://s3.amazonaws.com/prosepair/' + p.n + '.png';
 
 					if (p.t == 'circle'){
 						physicsService.addCircle(p.n, p.r, {
@@ -138,7 +143,7 @@ angular.module('resumeApp').controller('skillsController', function($scope, phys
 			},{
 				'name': 'Objective C',
 				'level': 'Apprentice',
-				'physics': {'t': 'circle', 'n': 'objectivec', 'r': 150 *.3, 
+				'physics': {'t': 'circle', 'n': 'ObjectiveC', 'r': 150 *.3, 
 					'c': [605, -320], 's': .3}
 			}]
 		},{
@@ -211,4 +216,4 @@ angular.module('resumeApp').controller('skillsController', function($scope, phys
 		}];
 	}
 
-});
+}]);

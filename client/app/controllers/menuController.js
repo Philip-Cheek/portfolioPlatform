@@ -1,4 +1,7 @@
-angular.module('resumeApp').controller('menuController', function($scope, $location, cardService, routeService){
+angular.module('resumeApp').controller('menuController', 
+['$scope', '$location', 'cardService', 'routeService', 'imageService',
+function($scope, $location, cardService, routeService, imageService){
+
 	var listeners = {};
 
 	$scope.menuItems = [
@@ -33,7 +36,6 @@ angular.module('resumeApp').controller('menuController', function($scope, $locat
 	init();
 
 	$scope.linkClicked = function(item){
-		console.log(item)
 		if (!item.selected){
 			for (var i = 0; i < $scope.menuItems.length; i++){
 
@@ -54,6 +56,7 @@ angular.module('resumeApp').controller('menuController', function($scope, $locat
 	function init(){
 		cardService.toggleCardServices($location.url() == '/');
 		routeService.enableRouteWatch($scope.menuItems);
+		imageService.loadCache();
 	}
 	
-});
+}]);
