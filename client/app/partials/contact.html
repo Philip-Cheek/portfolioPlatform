@@ -8,6 +8,7 @@
 			<i ng-class = "{'open':field}" class="fa fa-chevron-circle-right" aria-hidden="true"></i>  <span class = 'under'>Contact Field</span></a>
 		<div id = 'cField' class = 'sUnder' ng-class = "{'cRevealed': field}">
 			<p ng-if = "error" style= "color:red">Invalid Email</p>
+			<p>{{afterSent}}</p>
 			<table>
 				<tr>
 					<td>Name: </td>
@@ -18,10 +19,19 @@
 					<td><input type = 'textField' ng-model = 'send.email' ng-change = 'updateEmail()'></td>
 				</tr>
 			</table>
-		
-			Message: <br><br><textarea ng-model = 'send.message' ng-focus="fieldFocus()" send.name = '' ></textarea>
-			<button ng-click = 'submit(); sent = true' ng-if = '!sent'>Send</button>
-			<p class = 'thanks' ng-if = 'sent'>Thanks! I'm excited to hear from you!</p>
+			
+			<div ng-class = '{"sent":sent == true}'id = 'message'>
+				<p>Message:</p> <br><br>
+				<textarea ng-model = 'send.message' ng-focus="fieldFocus()"></textarea>
+			</div>
+
+			<button ng-click = 'submit();' ng-if = '!sent'>Send</button>
+			<div id = 'restore'>
+				<p class = 'thanks' ng-if = 'sent'>Thanks! I'm excited to hear from you!</p>
+				<button id = 'restore' ng-click = 'restore();' ng-if = 'sent && response'>
+					<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+				</button>
+			</div>
 		</div>
 	</div>
 </div>

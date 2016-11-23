@@ -136,8 +136,10 @@ angular.module('resumeApp').service('projectService', function(){
 						'The walls are rectangular bodies of which are established on the canvas for the elements to collide onto. A variety of options are also set, of which are both numerous and of likely little interest to the reader. The renderer is the sequence in which all draw attributes of the bodies are updated and redrawn onto the canvas.',
 						'The controller may add both bodies and constraints for each bodies using the physics object methods I provide. It may also add a link to a sprite asset. It is, however, an expensive operation to add each body to the World at separate intervals due to quirks in the engine. This is doubly true when adding custom physical constraints to an object.',
 						'Therefore when a body or constraint created in the physics object, it is added to its respective queue. It is up to the controller when to unload the queues onto the World. When you toggle to the more practical ‘legible’ view, the World is cleared and the render loop stops running.',
+						'Since my sandbox textures rely on numerous image assets requested from an s3 bucket, I do not wish to run the renderer until all of my images have been loaded. I want to start loading the assets into the frontend as soon as possible, regardless of whether the end user has requested the partial that will display the renderer. To achieve this, I have written an image service.',
+						'The image service may load a set of images into memory. A controller may inject a callback into the imageService, which will run when an image set is \'complete.\' In the event that the assets have not finished downloading by the time the user visits the skills partial, I have a loading animation that runs by default, of which will be disabled once the image service signals that our images have been cached.',
 						'When a message is sent through the contact page, the backend re-formats the text and sends the message body by way of email to my personal email address. ',
-						'I am happy with the results so far and have big plans to expand the platform little by little down the line as time affords.'
+						'I am happy with the results so far and have plans to expand the platform little by little down the line as time affords.'
 					],
 				}
 			],

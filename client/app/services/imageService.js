@@ -61,6 +61,10 @@ angular.module('resumeApp').service('imageService', function(){
 		}
 	};
 
+	service.isCacheComplete = function(){
+		return cacheComplete;
+	}
+
 	service.getImage = function(name){
 		var image = cache[name];
 		var status = image.complete && image.naturalHeight !== 0;

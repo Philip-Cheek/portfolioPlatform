@@ -1,17 +1,19 @@
 var express = require('express');
 var path = require('path');
 var nodemailer = require('nodemailer');
+var helmet = require('helmet');
 var app = express();
 
 app.use(express.static(path.join(__dirname, '/client')));
+app.use(helmet());
 
 var server = require('http').createServer(app);  
 var bodyParser = require('body-parser');
 var transporter = nodemailer.createTransport({
 	service: 'Gmail',
 	auth: {
-    	user: 'REDACTED',
-    	pass: 'REDACTED'
+    	user: '',
+    	pass: ''
 	}
 });
 
@@ -25,17 +27,17 @@ app.post('/sendMail', function(req, res){
 	if (req.body.person && req.body.email){
 		var mailOptions = {
 		    from: req.body.email, 
-		    to: 'REDACTED', 
+		    to: '', 
 		    subject: 'IMPORTANT! FROM PORTFOLIO SITE!! FROM ' + req.body.person, 
-		    text: 'Hello world 🐴',
-		    html: '<b>' + req.body.person + '</b>'
+		    text: '🐴 PORTFOLIO MESSAGE: 🐴 ' + req.body.message,
+		    html: '<b>' + 'Person: ' + req.body.person + ' 🐴 + Email: ' + req.body.email + '🐴 + message: ' + req.body.message + '</b>'
 		};
 	
 		transporter.sendMail(mailOptions, function(error, info){
 			if (error){
-				console.log(error)
+				res.json({'status': false});
 			}else{
-				console.log('success!')
+				res.json({'status': true});
 			}
 		});
 	}

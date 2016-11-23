@@ -51,14 +51,19 @@ angular.module('resumeApp').service('cardService', ['$window', function($window)
 
 
 	function eventGitOverlap(event){
-		var gitCoord = document.getElementById('git').getBoundingClientRect();
-		var x = event.pageX;
-		var y = event.pageY;
+		var git = document.getElementById('git');
 
-		var withinWidth = x > gitCoord.left && x < gitCoord.right;
-		var withinHeight = y < gitCoord.bottom && y > gitCoord.top;
+		if (git !== null){
+			var gitCoord = git.getBoundingClientRect();
+				x = event.pageX,
+				y = event.pageY,
+				withinWidth = x > gitCoord.left && x < gitCoord.right,
+				withinHeight = y < gitCoord.bottom && y > gitCoord.top;
 
-		return withinWidth && withinHeight;
+			return withinWidth && withinHeight;
+		}else{
+			return false;
+		}
  	}
 
 	function findRotationDegrees(event){

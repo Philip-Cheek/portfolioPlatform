@@ -4,14 +4,8 @@ angular.module('resumeApp').controller('skillsController',
 	var haltRequest = false;
 	$scope.skills = [];
 	$scope.view= 'Legible';
-	
 	setSkills();
-	imageService.onCacheComplete(function(){
-		var loadSkills = document.getElementById('loadSkills');
-		loadSkills.style.visibility = 'hidden'
-		initPhysics();
-		setLegibleLink();
-	});
+	setLoading();
 
 	$scope.legibleToggle = function(){
 		haltRequest = false;
@@ -84,7 +78,25 @@ angular.module('resumeApp').controller('skillsController',
 			haltRequest = false;
 			legilize();
 		}, 700)
-	};
+	}
+
+	function setLoading(){
+		var complete = imageService.isCacheComplete();
+		var loadSkills = document.getElementById('loadSkills');
+		if (!complete){
+			loadSkills.style.visibility = 'visible'
+			imageService.onCacheComplete(function(){
+				loadSkills.style.visibility = 'hidden'
+				initPhysics();
+				setLegibleLink();
+			});
+		}else{
+			loadSkills.style.visibility = 'hidden'
+			initPhysics();
+			setLegibleLink();
+		}
+	}
+
 
 
 	function addFallingSkills(){

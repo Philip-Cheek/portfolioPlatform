@@ -474,6 +474,7 @@ a.mItem:before,a.mItem:after{
   border:.15em solid gray;
 }
 
+
 .cRevealed{
   max-height: 35em;
   transition: max-height .35s ease;
@@ -484,6 +485,24 @@ a.mItem:before,a.mItem:after{
   width:50em;
   padding:1em;
 }
+
+#message{
+  max-height:60em;
+  overflow:hidden;
+  transition: max-height .35s ease, opacity .35s ease;
+}
+
+#message p{
+  opacity:100;
+  transition: opacity .2s ease;
+}
+  .sent{
+    max-height:0em !important;
+  }
+
+  #message.sent p{
+    opacity:0;
+  }
 
 #cField button{
   display: block;
@@ -532,7 +551,7 @@ a.mItem:before,a.mItem:after{
 #aWrap{
   font-family: arial;
   position: absolute;
-  top:0;
+  top:2em;
   margin:1em;
   padding:1.3em;
   background: white;
@@ -547,7 +566,8 @@ a.mItem:before,a.mItem:after{
   position: absolute;
   margin-left: 30%;
   margin-top:23%;
-  font-family: arial
+  font-family: arial;
+  visibility:'hidden';
 }
 
   #loadSkills i{
@@ -560,6 +580,25 @@ a.mItem:before,a.mItem:after{
     margin-left: -.8em;
   }
 
+#restore p{
+  display: inline-block;
+}
+#restore button{
+  margin-left:1em;
+  display: inline-block;
+}
+#restore i{
+  font-size: 1em;
+}
+
+#about h1{
+  position: absolute;
+  font-family: 'Monoton', cursive;
+  color:#22313F;
+  left: 38%;
+  font-size:3em;
+  text-shadow:3px 3px rgba(215,52,68, .3);
+}
 
 
 

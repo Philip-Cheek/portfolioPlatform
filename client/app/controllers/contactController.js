@@ -5,14 +5,17 @@ angular.module('resumeApp').controller('contactController',
 		'email': ''
 	};
 
+	$scope.sent = false;
+	$scope.response = false;
+
 	$scope.contact = {
 		'Phone': {
-			'cInfo':'(505) 917-9097',
+			'cInfo':'',
 			'logo': "fa fa-phone"
 		},
 
 		'Email': {
-			'cInfo':'philip@cheekfamily.org',
+			'cInfo':'',
 			'logo': 'fa fa-envelope'
 		}
 	};
@@ -34,11 +37,28 @@ angular.module('resumeApp').controller('contactController',
 
 	$scope.submit = function(){
 		$scope.error = !validEmail();
-
-		if (!$scope.error){
-			$http.post('/sendMail', $scope.send);
-		}
+		$scope.sent = !$scope.error;
+		if ($scope.sent){
+			$scope.afterSent = 'Your message has been successfully submitted'
+			$scope.response = true;
+		};
+		// if (!$scope.error){
+		// 	$http.post('/sendMail', $scope.send).success(function(response){
+		//		$scope.response = true;
+		// 		if (response.status){
+		// 			$scope.afterSent = 'Your message has been successfully submitted';
+		// 		}else{
+		// 			$scope.afterSent = 'There has been an error. Something has gone wrong';
+		// 		}
+		// 	});
+		// }
 	};
+
+	$scope.restore = function(){
+		$scope.response = false;
+		$scope.sent = false;
+
+	}
 
 	function validEmail() {
 		if (!$scope.send.email){
